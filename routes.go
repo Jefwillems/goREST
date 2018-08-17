@@ -15,9 +15,15 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
-		"Index",
-		"GET",
-		"/",
-		Index,
+		Name:        "Index",
+		Method:      "GET",
+		Pattern:     "/",
+		HandlerFunc: Index,
+	},
+	Route{
+		Name:        "AddUser",
+		Method:      "POST",
+		Pattern:     "/user",
+		HandlerFunc: AddUser,
 	},
 }
