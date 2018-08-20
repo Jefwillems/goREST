@@ -1,7 +1,7 @@
-package db
+package main
 
 import "sync"
-import "../models"
+import "./models"
 
 type DB struct {
 	users models.Users
