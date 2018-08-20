@@ -1,8 +1,6 @@
 package main
 
 import (
-	"./db"
-	"./models"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -10,7 +8,7 @@ import (
 )
 
 func Index(writer http.ResponseWriter, r *http.Request) {
-	users := db.GetUsers(db.GetInstance())
+	users := GetUsers(GetInstance())
 	writer.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	writer.WriteHeader(http.StatusOK)
 
@@ -19,9 +17,9 @@ func Index(writer http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func AddUser(at http.ResponseWriter, r *http.Request) {
-	data := db.GetInstance()
-	var m models.User
+func AddUserHandler(at http.ResponseWriter, r *http.Request) {
+	data := GetInstance()
+	var m User
 	body, err := ioutil.ReadAll(r.Body)
 
 	if err != nil {
@@ -30,7 +28,7 @@ func AddUser(at http.ResponseWriter, r *http.Request) {
 
 	json.Unmarshal(body, &m)
 	log.Print(m)
-	db.AddUser(data, m)
+	AddUser(data, m)
 	at.WriteHeader(http.StatusOK)
 	at.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	if err := json.NewEncoder(at).Encode(m); err != nil {

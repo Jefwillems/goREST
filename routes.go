@@ -24,6 +24,6 @@ var routes = Routes{
 		Name:        "AddUser",
 		Method:      "POST",
 		Pattern:     "/user",
-		HandlerFunc: AddUser,
+		HandlerFunc: AddUserHandler,
 	},
 }
